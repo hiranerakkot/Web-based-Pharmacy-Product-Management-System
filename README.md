@@ -39,12 +39,22 @@ This results in privilege retention after account revocation.
 
 ## Steps to Reproduce
 
-1. Login as an Admin user.
-2. Capture the `PHPSESSID` from browser cookies.
-3. Login as Super Admin in another browser or private window.
-4. Delete the Admin account.
-5. Replay a request using the captured session:
+1. Login as given Super Admin credentials.
+2. Navigate to User Management > Add User
+3. Create a Admin account
+   ```bash
+   testadmin
+4. Login as `testadmin` in another browser or private window.
+5. In Super Admin dashboard, navigate to User Management > Admin Record
+6. Delete newly created `testadmin` account.
+7. In `testadmin` browser/windows, You can still access and can view updated details.
+8. Captured `PHPSESSID` of `testadmin` using Cookie Editor.
+9. Using Terminal executed the command:
 
-```bash
-curl -i http://TARGET/product_expiry/index.php \
+  ```bash
+  curl -i http://TARGET/product_expiry/index.php \
   -H "Cookie: PHPSESSID=SESSION_ID"
+```
+10. Got 200 OK, Welcome to Admin Dashboard
+
+## Proof of Concept
