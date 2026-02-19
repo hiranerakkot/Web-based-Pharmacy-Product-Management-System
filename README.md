@@ -1,4 +1,4 @@
-# Project: Web-based-Pharmacy-Product-Management-System
+# Product: Web-based-Pharmacy-Product-Management-System
 
 ## Product Information
 Vendor Homepage: [link](https://www.sourcecodester.com/)
