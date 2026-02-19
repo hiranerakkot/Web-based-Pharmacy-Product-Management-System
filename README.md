@@ -1,1 +1,41 @@
-# Web-based-Pharmacy-Product-Management-System
+# Project: Web-based-Pharmacy-Product-Management-System
+
+## Title
+Broken Session Invalidation After Account Deletion
+
+## Severity
+High
+
+## Vulnerability Type
+- Broken Session Management
+- Broken Access Control
+
+---
+
+## Summary
+
+A deleted admin account can continue accessing authenticated pages using an existing active session (`PHPSESSID`). The application does not invalidate active sessions after account deletion.
+
+This allows privilege retention even after the account has been removed from the system.
+
+---
+
+## Description
+
+When an admin account is deleted by a super admin, any active session associated with that account remains valid. The deleted user can continue accessing the Admin Dashboard and other protected pages until the session expires.
+
+The system does not re-validate the user's existence or status on each request.
+
+---
+
+## Steps to Reproduce
+
+1. Login as an Admin user.
+2. Capture the `PHPSESSID` from browser cookies.
+3. Login as Super Admin in another browser or private window.
+4. Delete the Admin account.
+5. Replay a request using the captured session:
+
+```bash
+curl -i http://TARGET/product_expiry/index.php \
+  -H "Cookie: PHPSESSID=SESSION_ID"
