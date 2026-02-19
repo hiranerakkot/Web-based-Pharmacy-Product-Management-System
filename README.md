@@ -17,22 +17,21 @@ High
 
 ## Vulnerability Type
 - Broken Session Management
-- Broken Access Control
-
+- Broken Access Control (Privilege Revocation Bypass)
 
 ## Summary
 
-A deleted admin account can continue accessing authenticated pages using an existing active session (`PHPSESSID`). The application does not invalidate active sessions after account deletion.
+When an admin account is deleted by the super admin, any existing active session (`PHPSESSID`) associated with that account remains valid.  
+Although new login attempts fail (as expected), the previously authenticated session continues to grant access until manual logout or session expiration.
+This results in privilege retention after account deletion.
 
+## Impact
 
-## Description
-
-When an admin account is deleted by the super admin, any active session associated with that account remains valid.
-Even after deletion, the user can continue accessing the Admin Dashboard and other authenticated pages until the session expires.
-
-The system does not re-validate the user's existence or status on each request.
-This results in privilege retention after account revocation.
-
+- Privilege revocation bypass
+- Continued administrative access after account deletion
+- Unauthorized access to system data and functionality
+- Failure of access control enforcement
+- Potential risk from terminated or unauthorized user
 
 ## Steps to Reproduce
 
@@ -66,3 +65,9 @@ This results in privilege retention after account revocation.
 <img width="1718" height="878" alt="kali-linux-2025 4-vmware-amd64-2026-02-19-16-03-02" src="https://github.com/user-attachments/assets/ca52f797-04a1-44f9-b393-5d99635ae400" />
 <img width="1718" height="878" alt="kali-linux-2025 4-vmware-amd64-2026-02-19-16-06-17" src="https://github.com/user-attachments/assets/b4944950-bc57-4620-b439-cda392b6a346" />
 
+## Mitigation
+
+- Invalidate all active sessions when a user account is deleted.
+- Re-validate user existence and status on every authenticated request
+- Implement centralized authorization middleware to enforce consistent access control checks.
+- Consider server-side session storage that supports forced session invalidation.
