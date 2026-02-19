@@ -2,8 +2,11 @@
 
 ## Product Information
 Vendor Homepage: [link](https://www.sourcecodester.com/)
+
 Software Link: [link](https://www.sourcecodester.com/php/17883/web-based-product-alert-system.html)
+
 Affected Version: [<= v1.0]
+
 BUG Author: Hiran
 
 ---
@@ -30,8 +33,9 @@ A deleted admin account can continue accessing authenticated pages using an exis
 
 When an admin account is deleted by the super admin, any active session associated with that account remains valid.
 Even after deletion, the user can continue accessing the Admin Dashboard and other authenticated pages until the session expires.
-This results in privilege retention after account revocation.
+
 The system does not re-validate the user's existence or status on each request.
+This results in privilege retention after account revocation.
 
 ---
 
