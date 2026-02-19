@@ -2,11 +2,8 @@
 
 ## Product Information
 Vendor Homepage: [link](https://www.sourcecodester.com/)
-
 Software Link: [link](https://www.sourcecodester.com/php/17883/web-based-product-alert-system.html)
-
 Affected Version: [<= v1.0]
-
 BUG Author: Hiran
 
 ---
